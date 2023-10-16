@@ -141,3 +141,8 @@ int fputc(int c, FILE *f)
   while((pADI_UART0->COMLSR&0x20) == 0);// tx fifo empty
   return c;
 }
+int my_getchar(void)
+{
+  while((pADI_UART0->COMLSR&0x01) == 0); // wait for rx data
+  return pADI_UART0->COMRX;
+}
